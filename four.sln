@@ -1,0 +1,21 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{110C096D-AA1A-4D3E-A594-3A39DEE70450}"
+	ProjectSection(SolutionItems) = preProject
+		calendar.html = calendar.html
+		homepage.css = homepage.css
+		index.html = index.html
+		lawson.js = lawson.js
+		colorUtils.js = colorUtils.js
+		LawsonGeometry.js = LawsonGeometry.js
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+	EndGlobalSection
+EndGlobal
