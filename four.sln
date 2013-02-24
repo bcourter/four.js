@@ -6,9 +6,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		calendar.html = calendar.html
 		homepage.css = homepage.css
 		index.html = index.html
-		HypercubeGeometry.js = HypercubeGeometry.js
 		tessinteract.js = tessinteract.js
 		math\Matrix5.js = math\Matrix5.js
+		Four.js = Four.js
+		math\Box4.js = math\Box4.js
+		extras\geometries\TesseractGeometry.js = extras\geometries\TesseractGeometry.js
+		core\Geometry.js = core\Geometry.js
+		core\Face4.js = core\Face4.js
 	EndProjectSection
 EndProject
 Global

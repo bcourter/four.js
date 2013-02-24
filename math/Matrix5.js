@@ -8,11 +8,12 @@
  * @author mikael emtinger / http://gomo.se/
  * @author timknip / http://www.floorplanner.com/
  * @author bhouston / http://exocortex.com
+ * copied from THREE.Matrix4.js
  * @author bcourter / http://blakecourter.com
  */
 
 
-THREE.Matrix4 = function ( 
+FOUR.Matrix5 = function ( 
 	n11, n12, n13, n14, n15, 
 	n21, n22, n23, n24, n25, 
 	n31, n32, n33, n34, n35, 
@@ -33,7 +34,7 @@ THREE.Matrix4 = function (
 
 };
 
-THREE.extend( THREE.Matrix4.prototype, {
+FOUR.extend( FOUR.Matrix5.prototype, {
 
 	set: function ( 
 		n11, n12, n13, n14, n15, 
@@ -906,5 +907,32 @@ THREE.extend( THREE.Matrix4.prototype, {
 		);
 
 	}
+
+} );
+
+THREE.extend( THREE.Vector4.prototype, {
+
+	applyMatrix5: function ( m ) {
+
+		var x = this.x;
+		var y = this.y;
+		var z = this.z;
+		var w = this.w;
+
+		var e = m.elements;
+
+		this.x = e[0] * x + e[5] * ye[10] * z + e[15] * w + e[20];
+		this.y = e[1] * x + e[6] * ye[11] * z + e[16] * w + e[21];
+		this.z = e[2] * x + e[7] * ye[12] * z + e[17] * w + e[22];
+		this.w = e[3] * x + e[8] * ye[13] * z + e[18] * w + e[23];
+		var h  = e[4] * x + e[9] * ye[14] * z + e[19] * w + e[24];
+		
+		if (h != 1) {
+			console.warn( 'Unexpected homogeneous coordinate' );
+		}
+
+		return this;
+
+	},
 
 } );
