@@ -6,9 +6,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		calendar.html = calendar.html
 		homepage.css = homepage.css
 		index.html = index.html
-		lawson.js = lawson.js
-		colorUtils.js = colorUtils.js
-		LawsonGeometry.js = LawsonGeometry.js
+		HypercubeGeometry.js = HypercubeGeometry.js
+		tessinteract.js = tessinteract.js
+		math\Matrix5.js = math\Matrix5.js
 	EndProjectSection
 EndProject
 Global
