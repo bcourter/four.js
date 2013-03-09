@@ -15,7 +15,8 @@ function loop() {
 	// scene
 	var scene = new THREE.Scene();
 	
-	var tesseract = new FOUR.TesseractGeometry( 200, 200, 200, 200, 1, 1, 1, 1 );
+//	var fourGeometry = new FOUR.TesseractGeometry( 200, 200, 200, 200, 1, 1, 1, 1 );
+	var fourGeometry = new FOUR.CliffordTorusGeometry( 200, 200, 200, 200, 64, 64, 64, 64 );
 	var time = new Date().getTime();
 	var trans = new FOUR.Matrix5().makeRotationWX(time * 0.0003);
 	var trans2 = new FOUR.Matrix5().makeRotationWY(time * 0.001);
@@ -24,7 +25,7 @@ function loop() {
 	
 //	var persp = 
 	
-	tesseract.applyMatrix(trans);
+	fourGeometry.applyMatrix(trans);
 	
 	var materials = [
 		new THREE.MeshLambertMaterial( { 
@@ -40,10 +41,9 @@ function loop() {
 		} )
 	];
 	
-	var tesseract3 = THREE.SceneUtils.createMultiMaterialObject( tesseract.asThreeGeometry(), materials );
-	
-	tesseract3.overdraw = true;
-	scene.add(tesseract3);
+	var shape = THREE.SceneUtils.createMultiMaterialObject( fourGeometry.asThreeGeometry(), materials );
+//	shape.overdraw = true;
+	scene.add(shape);
 	
 	// sphere
 	var sphere = new THREE.Mesh(new THREE.CubeGeometry(200, 200, 200), new THREE.MeshLambertMaterial({color: 0x0000ff}));
