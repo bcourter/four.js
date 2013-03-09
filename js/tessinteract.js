@@ -86,7 +86,7 @@ function render() {
 	var trans = new FOUR.Matrix5().makeRotationWX(time * 0.03);
 	var trans2 = new FOUR.Matrix5().makeRotationWY(time * 0.2);
 	var trans3 = new FOUR.Matrix5().makeRotationZW(time * 0.02);
-	trans = trans2.multiply(trans3).multiply(translate);
+	trans = trans2.multiply(trans).multiply(translate);
 	
 //	var persp = 
 	
