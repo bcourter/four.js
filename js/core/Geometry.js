@@ -265,15 +265,30 @@ FOUR.Geometry.prototype = {
 
 	},
 */
-	asThreeGeometry: function () {
+	asThreeGeometry: function (isStereographic) {
+		var isStereographic = isStereographic || false;
 
 		var geometry = new THREE.Geometry();
 
 		var vertices = this.vertices;
+		var rejectVertices = [];
 
 		for ( var i = 0, il = vertices.length; i < il; i ++ ) {
 			var v = vertices[i];
-			geometry.vertices.push( new THREE.Vector3(v.x, v.y, v.z) );
+			var vector;
+			if (isStereographic) {
+				var denominator = 1 / (1 - v.w);
+				vector = new THREE.Vector3(v.x * denominator, v.y * denominator, v.z * denominator);
+			} else {
+				vector = new THREE.Vector3(v.x, v.y, v.z);
+			}
+			
+			geometry.vertices.push(vector);
+
+			if (vector.length() > 10000) {
+				rejectVertices.push(geometry.vertices.length);
+			}
+			
 	//		geometry.colors.push( new THREE.Vector3(v.x, v.y, v.z) );
 	//		geometry.normals.push( new THREE.Vector3(v.x, v.y, v.z).normalize() );
 		}
@@ -285,6 +300,12 @@ FOUR.Geometry.prototype = {
 			var b = faces[i].b;
 			var c = faces[i].c;
 			var d = faces[i].d;
+			
+		//	if (rejectVertices.indexOf(a) != -1 || rejectVertices.indexOf(b) != -1 || rejectVertices.indexOf(b) != -1 || rejectVertices.indexOf(b) != -1) {
+			if ( geometry.vertices[a].distanceTo(geometry.vertices[c]) > 20 ||
+				geometry.vertices[b].distanceTo(geometry.vertices[d]) > 20 ) {
+				continue;
+			}
 
 			var face = new THREE.Face4 ( a, b, c, d, null, faces[i].color, faces[i].materialIndex );
 			geometry.faces.push( face );

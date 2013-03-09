@@ -677,7 +677,7 @@ FOUR.extend( FOUR.Matrix5.prototype, {
 
 	},
 
-	makeTranslation: function ( x, y, z ) {
+	makeTranslation: function ( x, y, z, w ) {
 
 		this.set(
 
