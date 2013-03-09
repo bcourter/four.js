@@ -81,7 +81,7 @@ function render() {
 		return;
 	}
 	
-	var translate = new FOUR.Matrix5().makeTranslation(0, 0, 0, -1);
+	var translate = new FOUR.Matrix5().makeTranslation(0, 0, 0, 0);
 	
 	var trans = new FOUR.Matrix5().makeRotationWX(time * 0.03);
 	var trans2 = new FOUR.Matrix5().makeRotationWY(time * 0.2);
