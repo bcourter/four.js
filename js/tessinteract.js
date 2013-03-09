@@ -37,14 +37,14 @@ function render() {
 	var scene = new THREE.Scene();
 	
 //	var fourGeometry = new FOUR.TesseractGeometry( 200, 200, 200, 200, 1, 1, 1, 1 );
-	var fourGeometry = new FOUR.CliffordTorusGeometry( 1/2, 1/2, 1/2, 2, 64, 64, 64, 64 );
+	var fourGeometry = new FOUR.CliffordTorusGeometry( 1, 1, 1, 1, 64, 64, 64, 64 );
 	var time = new Date().getTime();
-	var translate = new FOUR.Matrix5().makeTranslation(1, 0, 0, 0);
+	var translate = new FOUR.Matrix5().makeTranslation(0, 0, 0, -1);
 	
 	var trans = new FOUR.Matrix5().makeRotationWX(time * 0.00003);
-	var trans2 = new FOUR.Matrix5().makeRotationWY(time * 0.00004);
+	var trans2 = new FOUR.Matrix5().makeRotationWY(time * 0.0002);
 	var trans3 = new FOUR.Matrix5().makeRotationZW(time * 0.00002);
-	trans = trans3.multiply(trans2).multiply(translate);
+	trans = trans2.multiply(translate);
 	
 //	var persp = 
 	
