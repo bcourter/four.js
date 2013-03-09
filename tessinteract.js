@@ -1,124 +1,63 @@
-var scene = new THREE.Scene(); 
-var camera = new THREE.PerspectiveCamera(70, window.innerWidth/window.innerHeight, 1, 10000);  
-//var camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 10000 );
-//camera.position.set( 0, 300, 500 );
-var renderer = new THREE.WebGLRenderer(); 
-var mouse = { x: 0, y: 0 }, INTERSECTED;
-var projector = new THREE.Projector();
-
-renderer.sortObjects = false;
-renderer.setSize(window.innerWidth, window.innerHeight); 
+var renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
-document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-window.addEventListener( 'resize', onWindowResize, false );
 
-var uSegments = 128;
-var vSegments = 46;
+// camera
+var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
+camera.position.z = 700;
 
-var parent = new THREE.Object3D();
-//parent.rotation.x += Math.PI / 4
-scene.add( parent );
 
-var lowSaturation = 0.4;
-var highSaturation = 0.6;
-var lowBrightness = 0.7;
-var highBrightness = 0.7;
+loop();
 
-	var tesseract = new FOUR.TesseractGeometry( 2, 2, 2, 2, 1, 1, 1, 1 );
-	var geometry = tesseract.asThreeGeometry();
+function loop() {
+	requestAnimationFrame( loop, renderer.domElement );
+
+	// scene
+	var scene = new THREE.Scene();
 	
-	geomerty = new THREE.SphereGeometry(100);
-
-        var sphere = new THREE.Mesh(new THREE.SphereGeometry(200, 50, 50), new THREE.MeshLambertMaterial({
-            color: 0x0000ff
-        }));
-        sphere.overdraw = true;
-        scene.add(sphere);
- 
- 
-	var hue = 1;
-
-	var fillMaterial = new THREE.MeshLambertMaterial( { 
-		color: new THREE.Color().setHSL(hue, lowSaturation, lowBrightness),
-		opacity: 1,
-		transparent: true,
-		side: THREE.DoubleSide,
-		depthTest: true 
-	} );
-
-	var wireframeMaterial = new THREE.MeshBasicMaterial( { 
-		color: new THREE.Color().setHSL(hue, lowSaturation, lowBrightness), 
-		wireframe: true,  
-		opacity: 0.5, 
-		side: THREE.DoubleSide 
-	} );
+	var tesseract = new FOUR.TesseractGeometry( 200, 200, 200, 200, 1, 1, 1, 1 );
+	var time = new Date().getTime();
+	var trans = new FOUR.Matrix5().makeRotationWX(time * 0.0003);
+	var trans2 = new FOUR.Matrix5().makeRotationWY(time * 0.001);
+	var trans3 = new FOUR.Matrix5().makeRotationZW(time * 0.0002);
+	trans = trans.multiply(trans3).multiply(trans2);
 	
-	var materials = 0 % 2 == 0 ? [fillMaterial] : [wireframeMaterial];
-
-	var mesh = THREE.SceneUtils.createMultiMaterialObject( geometry, materials );
-	mesh.hue = hue;
-	parent.add(mesh);  
-
-
-
-
-var light = new THREE.DirectionalLight( 0xffffff );
-light.position.set( 0, 0, 1 );
-scene.add( light );
-
-light = new THREE.DirectionalLight( 0xffffff );
-light.position.set( 0, 0, -1 );
-scene.add( light );
-
-camera.position.z = 4;
-
-function render() { 
-	parent.rotation.y += 0.002;
-	requestAnimationFrame(render); 
+//	var persp = 
 	
-	var vector = new THREE.Vector3( mouse.x, mouse.y, 0.1 );
-//	line.geometry.vertices[0] = vector;
-	projector.unprojectVector( vector, camera );
-
-	var raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
-	var intersects = raycaster.intersectObjects( scene.children, true );
+	tesseract.applyMatrix(trans);
 	
-//	line.geometry.vertices[1] = vector.subSelf( camera.position ).normalize();
-
-	if (intersects.length > 0) {
-		if (INTERSECTED != intersects[0].object) {
-			if (INTERSECTED) 
-				INTERSECTED.material.color = INTERSECTED.currentColor;
-
-			INTERSECTED = intersects[0].object;
-			INTERSECTED.currentColor = INTERSECTED.material.color;
-		//	INTERSECTED.material.color = new THREE.Color().setHSV(INTERSECTED.hue, highSaturation, highBrightness);
-		}
-	} else {
-		if (INTERSECTED) 
-			INTERSECTED.material.color = INTERSECTED.currentColor;
-			
-		INTERSECTED = null;
-	}
+	var materials = [
+		new THREE.MeshLambertMaterial( { 
+			color: 0x222222, 
+			side: THREE.DoubleSide,
+			transparent: true,  
+			opacity: 0.5
+		} ),
+		new THREE.MeshBasicMaterial( { 
+			color: 0xEEEEEE, 
+			shading: THREE.FlatShading, 
+			wireframe: true
+		} )
+	];
 	
+	var tesseract3 = THREE.SceneUtils.createMultiMaterialObject( tesseract.asThreeGeometry(), materials );
 	
-	renderer.render(scene, camera);
-} 
+	tesseract3.overdraw = true;
+	scene.add(tesseract3);
+	
+	// sphere
+	var sphere = new THREE.Mesh(new THREE.CubeGeometry(200, 200, 200), new THREE.MeshLambertMaterial({color: 0x0000ff}));
+	//sphere.overdraw = true;
+	//scene.add(sphere);
+	
+	// add subtle ambient lighting
+	var ambientLight = new THREE.AmbientLight(0x555555);
+	scene.add(ambientLight);
+	
+	// add directional light source
+	var directionalLight = new THREE.DirectionalLight(0xffffff);
+	directionalLight.position.set(1, 1, 1).normalize();
+	scene.add(directionalLight);
 
-render();
-
-function onDocumentMouseMove( event ) {
-	event.preventDefault();
-
-	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-}
-
-function onWindowResize() {
-
-	camera.aspect = window.innerWidth / window.innerHeight;
-	camera.updateProjectionMatrix();
-
-	renderer.setSize( window.innerWidth, window.innerHeight );
-
+	renderer.render( scene, camera );
 }

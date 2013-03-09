@@ -89,6 +89,10 @@ FOUR.extend( FOUR.Matrix5.prototype, {
 		return this;
 
 	},
+	
+	multiply: function ( m ) {
+	 return this.multiplyMatrices(this, m);
+	},
 
 	multiplyMatrices: function ( a, b ) {
 
@@ -921,11 +925,11 @@ THREE.extend( THREE.Vector4.prototype, {
 
 		var e = m.elements;
 
-		this.x = e[0] * x + e[5] * ye[10] * z + e[15] * w + e[20];
-		this.y = e[1] * x + e[6] * ye[11] * z + e[16] * w + e[21];
-		this.z = e[2] * x + e[7] * ye[12] * z + e[17] * w + e[22];
-		this.w = e[3] * x + e[8] * ye[13] * z + e[18] * w + e[23];
-		var h  = e[4] * x + e[9] * ye[14] * z + e[19] * w + e[24];
+		this.x = e[0] * x + e[5] * y + e[10] * z + e[15] * w + e[20];
+		this.y = e[1] * x + e[6] * y + e[11] * z + e[16] * w + e[21];
+		this.z = e[2] * x + e[7] * y + e[12] * z + e[17] * w + e[22];
+		this.w = e[3] * x + e[8] * y + e[13] * z + e[18] * w + e[23];
+		var h  = e[4] * x + e[9] * y + e[14] * z + e[19] * w + e[24];
 		
 		if (h != 1) {
 			console.warn( 'Unexpected homogeneous coordinate' );
