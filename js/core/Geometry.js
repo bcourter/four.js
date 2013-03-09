@@ -53,7 +53,12 @@ FOUR.Geometry.prototype = {
 
 		for ( var i = 0, il = this.faces.length; i < il; i ++ ) {
 			var face = this.faces[ i ];
-			face.centroid.applyMatrix5( matrix );
+			var vector = face.centroid;
+			
+			if (vector.d === undefined)
+				vector = new THREE.Vector4(vector.x, vector.y, vector.z, 0);
+			
+			vector.applyMatrix5( matrix );
 		}
 
 	},
@@ -265,8 +270,9 @@ FOUR.Geometry.prototype = {
 
 	},
 */
-	asThreeGeometry: function (isStereographic) {
+	asThreeGeometry: function (isStereographic, isInverting) {
 		var isStereographic = isStereographic || false;
+		var isInverting = isInverting || false;
 
 		var geometry = new THREE.Geometry();
 
@@ -276,16 +282,20 @@ FOUR.Geometry.prototype = {
 		for ( var i = 0, il = vertices.length; i < il; i ++ ) {
 			var v = vertices[i];
 			var vector;
+			
+			vector = new THREE.Vector3(v.x, v.y, v.z);
+			
 			if (isStereographic) {
-				var denominator = 1 / (1 - v.w);
-				vector = new THREE.Vector3(v.x * denominator, v.y * denominator, v.z * denominator);
-			} else {
-				vector = new THREE.Vector3(v.x, v.y, v.z);
+				vector.divideScalar(v.w);
+			}
+			
+			if (isInverting) {
+				vector.divideScalar(vector.lengthSq());
 			}
 			
 			geometry.vertices.push(vector);
 
-			if (vector.length() > 10000) {
+			if (!(vector.length() <= 100)) {
 				rejectVertices.push(geometry.vertices.length);
 			}
 			
@@ -302,12 +312,21 @@ FOUR.Geometry.prototype = {
 			var d = faces[i].d;
 			
 		//	if (rejectVertices.indexOf(a) != -1 || rejectVertices.indexOf(b) != -1 || rejectVertices.indexOf(b) != -1 || rejectVertices.indexOf(b) != -1) {
-			if ( geometry.vertices[a].distanceTo(geometry.vertices[c]) > 20 ||
-				geometry.vertices[b].distanceTo(geometry.vertices[d]) > 20 ) {
+			var maxLength = 20;
+			if ( geometry.vertices[a].distanceTo(geometry.vertices[b]) > maxLength ||
+				geometry.vertices[b].distanceTo(geometry.vertices[c]) > maxLength ||
+				geometry.vertices[a].distanceTo(geometry.vertices[c]) > maxLength ||
+				(d && geometry.vertices[b].distanceTo(geometry.vertices[d]) > maxLength) 
+			) {
 				continue;
 			}
 
-			var face = new THREE.Face4 ( a, b, c, d, null, faces[i].color, faces[i].materialIndex );
+			var face;
+			if (d === undefined)
+				face = new THREE.Face3 ( a, b, c, null, faces[i].color, faces[i].materialIndex );
+			else
+				face = new THREE.Face4 ( a, b, c, d, null, faces[i].color, faces[i].materialIndex );
+
 			geometry.faces.push( face );
 		}
 		

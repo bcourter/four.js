@@ -1,4 +1,4 @@
-var renderer, camera;
+var renderer, camera, settings, materials, objGeometry;
 
 init();
 animate();
@@ -7,15 +7,39 @@ function init() {
 	renderer = new THREE.WebGLRenderer();
 	renderer.setSize(window.innerWidth, window.innerHeight);
 	document.body.appendChild(renderer.domElement);
-
 	
 	camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 1000);
 	camera.position.z = 7;
 	
-	controls = new THREE.OrbitControls( camera );
+	controls = new THREE.OrbitControls( camera, renderer.domElement );
 	controls.addEventListener( 'change', render );
 
 	window.addEventListener( 'resize', onWindowResize, false );
+
+	var Settings = function () {
+		this.modelListSelect = document.getElementById("modelList");
+		this.isStereographicCheckbox = document.getElementById("isStereographic");
+		this.isInvertingCheckbox = document.getElementById("isInverting");
+	};
+	
+	materials = [
+		new THREE.MeshLambertMaterial( { 
+			color: 0x222222, 
+			side: THREE.DoubleSide,
+			shading: THREE.FlatShading, 
+			transparent: true,  
+			opacity: 0.5
+		} ),
+		new THREE.MeshBasicMaterial( { 
+			color: 0xEEEEEE, 
+			shading: THREE.FlatShading, 
+			wireframe: true
+		} )
+	];
+	
+	objGeometry = new FOUR.ObjGeometry('sheep.obj', 1);
+
+	settings = new Settings();	
 }
 
 function onWindowResize() {
@@ -34,38 +58,43 @@ function animate() {
 }
 
 function render() {
+	var time = new Date().getTime() / 1000;
 	var scene = new THREE.Scene();
 	
-//	var fourGeometry = new FOUR.TesseractGeometry( 200, 200, 200, 200, 1, 1, 1, 1 );
-	var fourGeometry = new FOUR.CliffordTorusGeometry( 1, 1, 1, 1, 64, 64, 64, 64 );
-	var time = new Date().getTime();
+	var modelName = settings.modelListSelect.value;
+	var fourGeometry = null;
+	
+	if (modelName == "tesseract") {
+		fourGeometry = new FOUR.TesseractGeometry( 1, 1, 1, 1, 8, 8, 8, 8 )
+	}
+	
+	if (modelName == "clifford torus") {
+		fourGeometry = new FOUR.CliffordTorusGeometry( 1, 1, 1, 1, 64, 64, 64, 64 );
+	}
+	
+	if (modelName == "obj") {
+		fourGeometry = objGeometry.clone();
+	}
+	
+	if (fourGeometry == null) {
+		console.warn( "No geometry selected" );
+		return;
+	}
+	
 	var translate = new FOUR.Matrix5().makeTranslation(0, 0, 0, -1);
 	
-	var trans = new FOUR.Matrix5().makeRotationWX(time * 0.00003);
-	var trans2 = new FOUR.Matrix5().makeRotationWY(time * 0.0002);
-	var trans3 = new FOUR.Matrix5().makeRotationZW(time * 0.00002);
-	trans = trans2.multiply(translate);
+	var trans = new FOUR.Matrix5().makeRotationWX(time * 0.03);
+	var trans2 = new FOUR.Matrix5().makeRotationWY(time * 0.2);
+	var trans3 = new FOUR.Matrix5().makeRotationZW(time * 0.02);
+	trans = trans2.multiply(trans3).multiply(translate);
 	
 //	var persp = 
 	
 	fourGeometry.applyMatrix(trans);
 	
-	var materials = [
-		new THREE.MeshLambertMaterial( { 
-			color: 0x222222, 
-			side: THREE.DoubleSide,
-			shading: THREE.FlatShading, 
-			transparent: true,  
-			opacity: 0.5
-		} ),
-		new THREE.MeshBasicMaterial( { 
-			color: 0xEEEEEE, 
-			shading: THREE.FlatShading, 
-			wireframe: true
-		} )
-	];
+
 	
-	var shape = THREE.SceneUtils.createMultiMaterialObject( fourGeometry.asThreeGeometry(true), materials );
+	var shape = THREE.SceneUtils.createMultiMaterialObject( fourGeometry.asThreeGeometry(settings.isStereographicCheckbox.checked, settings.isInvertingCheckbox.checked), materials );
 //	shape.overdraw = true;
 	scene.add(shape);
 	

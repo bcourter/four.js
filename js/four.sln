@@ -3,9 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{110C096D-AA1A-4D3E-A594-3A39DEE70450}"
 	ProjectSection(SolutionItems) = preProject
-		calendar.html = calendar.html
-		homepage.css = homepage.css
-		index.html = index.html
 		tessinteract.js = tessinteract.js
 		math\Matrix5.js = math\Matrix5.js
 		Four.js = Four.js
@@ -14,6 +11,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		core\Face4.js = core\Face4.js
 		extras\geometries\TesseractGeometry.js = extras\geometries\TesseractGeometry.js
 		extras\geometries\CliffordTorusGeometry.js = extras\geometries\CliffordTorusGeometry.js
+		..\homepage.css = ..\homepage.css
+		..\index.html = ..\index.html
+		extras\geometries\ObjGeometry.js = extras\geometries\ObjGeometry.js
+		core\Face3.js = core\Face3.js
 	EndProjectSection
 EndProject
 Global

@@ -10,7 +10,31 @@
     <div id="panel">
 	    <div id="panelInside">
 		    <h2>Tessinteract</h2>
-		    <p>Here we go.</p>
+		    <select id='modelList' >
+		    	<option value="tesseract">tesseract</option>
+		    	<option value="clifford torus">clifford torus</option>
+		    	<option selected="selected" value="obj">obj</option>
+		    </select>
+		    <br />
+		    <label>
+                <input type='checkbox' id='isStereographic' />
+                stereographic
+            </label>
+            <br />
+            <label>
+                <input type='checkbox' id='isInverting' checked='yes' />
+                invert
+            </label>
+            <hr />
+            <div id="controlsTextArea">
+                <p>
+                    Four.js demonstration
+                    <br />
+                    &copy; 2013 Blake Courter
+                    <br />
+                    <a href="https://github.com/bcourter/four.js" target='_blank'>http://github.com/bcourter/...</a>
+                </p>
+            </div>
 		</div>
 	</div>
 	</div>
@@ -19,16 +43,17 @@
   	<script src="js/controls/OrbitControls.js"></script> 
   	<script src="js/loaders/OBJLoader.js"></script>
 
-	<script src="js/Detector.js"></script>
 	<script src="js/libs/stats.min.js"></script>
 		
   	<script src="js/Four.js"></script> 
   	<script src="js/math/Box4.js"></script> 
   	<script src="js/math/Matrix5.js"></script> 
   	<script src="js/core/Geometry.js"></script> 
+  	<script src="js/core/Face3.js"></script> 
   	<script src="js/core/Face4.js"></script> 
   	<script src="js/extras/geometries/TesseractGeometry.js"></script> 
   	<script src="js/extras/geometries/CliffordTorusGeometry.js"></script> 
+  	<script src="js/extras/geometries/ObjGeometry.js"></script> 
   	
   	<script src="js/tessinteract.js"></script> 
 
