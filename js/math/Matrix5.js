@@ -209,9 +209,10 @@ FOUR.extend( FOUR.Matrix5.prototype, {
 	getInverse: function ( mMatrix, throwOnInvertible ) {
 		//based 
 		// based on http://www.euclideanspace.com/maths/algebra/matrix/functions/inverse/fourD/index.htm
+		precision = Math.pow(10, 3);
 		var det = mMatrix.determinant();
 		if ( det == 0 ) {
-			var msg = "Matrix4.getInverse(): can't invert matrix, determinant is 0";
+			var msg = "Matrix5.getInverse(): can't invert matrix, determinant is 0";
 			if ( throwOnInvertible || false ) {
 				throw new Error( msg ); 
 			} else {
@@ -220,7 +221,7 @@ FOUR.extend( FOUR.Matrix5.prototype, {
 			this.identity();
 			return this;
 		}
-		
+
 	    //var s = numeric.dim(x), abs = Math.abs, m = s[0], n = s[1];
 	    var s = 5, abs = Math.abs, m = 5, n = 5;
 	    //var A = new FOUR.Matrix5().copy(mMatrix), Ai, Aj;
@@ -232,20 +233,21 @@ FOUR.extend( FOUR.Matrix5.prototype, {
 	    for(i = 0; i < n; i++) {
 	    	I[i] = new Array(m);
 	    	A[i] = new Array(m);
-	    	for(j = 0; j < m; j++) {
-	    		//de-serialize matrices
-	    		I[i][j] = Output.elements[s*i + j];
-	    		A[i][j] = mMatrix.elements[s*i + j];
-	    	}
 	    }
 
-
+	    for(i = 0; i < n; i++) {
+	    	for(j = 0; j < m; j++) {
+	    		//de-serialize matrices
+	    		I[j][i] = Output.elements[s*j + i];
+	    		A[j][i] = mMatrix.elements[s*j + i];
+	    	}
+	    }
 
 		for(j = 0; j < n; ++j) {
 	        var i0 = -1;
 	        var v0 = -1;
 	        for(i = j; i !== m; ++i) {
-	        	k = abs(A[j][i]);
+	        	k = abs(A[i][j]);
 	        	if(k > v0) {
 	        		i0 = i;
 	        		v0 = k;
@@ -271,32 +273,11 @@ FOUR.extend( FOUR.Matrix5.prototype, {
 	    for(i = 0; i < n; i++) {
 	    	for(j = 0; j < m; j++) {
 	    		//serialize result
-	    		this.elements[s*i + j] = I[i][j];
+	    		this.elements[s*i + j] = I[i][j].toFixed(5);
 	    	}
 	    }
 
-
-		var det = this.determinant();
-		if ( det == 0 ) {
-			var msg = "Matrix4.getInverse(): can't invert matrix, determinant is 0";
-			if ( throwOnInvertible || false ) {
-				throw new Error( msg ); 
-			} else {
-				console.warn( msg );
-			}
-			this.identity();
-			return this;
-		}
-
-
-		//this.multiplyScalar( 1 / det );
-
 	    return this;
-
-
-
-
-
 
 		// var n11 = me[0], n12 = me[4], n13 = me[8], n14 = me[12];
 		// var n21 = me[1], n22 = me[5], n23 = me[9], n24 = me[13];
