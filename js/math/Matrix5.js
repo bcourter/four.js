@@ -207,12 +207,130 @@ FOUR.extend( FOUR.Matrix5.prototype, {
 
 
 	getInverse: function ( mMatrix, throwOnInvertible ) {
-		//based 
 		// based on http://www.euclideanspace.com/maths/algebra/matrix/functions/inverse/fourD/index.htm
-		precision = Math.pow(10, 3);
+		// precision = Math.pow(10, 3);
+		// var det = mMatrix.determinant();
+		// if ( det == 0 ) {
+		// 	var msg = "Matrix5.getInverse(): can't invert matrix, determinant is 0";
+		// 	if ( throwOnInvertible || false ) {
+		// 		throw new Error( msg ); 
+		// 	} else {
+		// 		console.warn( msg );
+		// 	}
+		// 	this.identity();
+		// 	return this;
+		// }
+
+		// Dammit this is ridiculous, starting anew
+
+		//THREE.Matrix4.prototype.constructor.apply(mAdjugate, [me.subarray(6,10).elements, me.subarray(11,15).elements, me.subarray(16,20).elements, me.subarray(21).
+		//mAdjugate = mAdjugate.transpose();
+		// based on http://www.euclideanspace.com/maths/algebra/matrix/functions/inverse/fourD/index.htm
+		//var te = this.elements;
+		var me = mMatrix.elements;
+		var AdjugateDeterminant = this.elements;
+		var n11 = me[0], n12 = me[5], n13 = me[10], n14 = me[15], n15 = me[20];
+		var n21 = me[1], n22 = me[6], n23 = me[11], n24 = me[16], n25 = me[21];
+		var n31 = me[2], n32 = me[7], n33 = me[12], n34 = me[17], n35 = me[22];
+		var n41 = me[3], n42 = me[8], n43 = me[13], n44 = me[18], n45 = me[23];
+		var n51 = me[4], n52 = me[9], n53 = me[14], n54 = me[19], n55 = me[24];
+
+		var mAdjugate = new THREE.Matrix4(	me[6], me[11], me[16], me[21],
+											me[7], me[12], me[17], me[22],
+											me[8], me[13], me[18], me[23],
+											me[9], me[14], me[19], me[24]);
+		AdjugateDeterminant[0] = mAdjugate.determinant();
+
+		mAdjugate = new THREE.Matrix4(	me[1], me[11], me[16], me[21],
+										me[2], me[12], me[17], me[22],
+										me[3], me[13], me[18], me[23],
+										me[4], me[14], me[19], me[24]);
+		AdjugateDeterminant[5] = mAdjugate.determinant();
+
+		mAdjugate = new THREE.Matrix4(	me[1], me[6], me[16], me[21],
+										me[2], me[7], me[17], me[22],
+										me[3], me[8], me[18], me[23],
+										me[4], me[9], me[19], me[24]);
+		AdjugateDeterminant[10] = mAdjugate.determinant();
+
+		mAdjugate = new THREE.Matrix4(	me[1], me[6], me[11], me[21],
+										me[2], me[7], me[12], me[22],
+										me[3], me[8], me[13], me[23],
+										me[4], me[9], me[14], me[24]);
+		AdjugateDeterminant[15] = mAdjugate.determinant();
+
+		mAdjugate = new THREE.Matrix4(	me[1], me[6], me[11], me[16],
+										me[2], me[7], me[12], me[17],
+										me[3], me[8], me[13], me[18],
+										me[4], me[9], me[14], me[19]);
+		AdjugateDeterminant[20] = mAdjugate.determinant();
+
+		mAdjugate = new THREE.Matrix4(	me[5], me[10], me[15], me[20],
+										me[7], me[12], me[17], me[22],
+										me[8], me[13], me[18], me[23],
+										me[9], me[14], me[19], me[24]);
+		AdjugateDeterminant[1] = mAdjugate.determinant();
+
+		mAdjugate = new THREE.Matrix4(	me[0], me[10], me[15], me[20],
+										me[2], me[12], me[17], me[22],
+										me[3], me[13], me[18], me[23],
+										me[4], me[14], me[19], me[24]);
+		AdjugateDeterminant[6] = mAdjugate.determinant();
+
+		mAdjugate = new THREE.Matrix4(	me[0], me[5], me[15], me[20],
+										me[2], me[7], me[17], me[22],
+										me[3], me[8], me[18], me[23],
+										me[4], me[9], me[19], me[24]);
+		AdjugateDeterminant[11] = mAdjugate.determinant();		
+
+		mAdjugate = new THREE.Matrix4(	me[0], me[5], me[10], me[20],
+										me[2], me[7], me[12], me[22],
+										me[3], me[8], me[13], me[23],
+										me[4], me[9], me[14], me[24]);
+		AdjugateDeterminant[16] = mAdjugate.determinant();		
+
+		mAdjugate = new THREE.Matrix4(	me[0], me[5], me[10], me[15],
+										me[2], me[7], me[12], me[17],
+										me[3], me[8], me[13], me[18],
+										me[4], me[9], me[14], me[19]);
+		AdjugateDeterminant[21] = mAdjugate.determinant();		
+
+		mAdjugate = new THREE.Matrix4(	me[5], me[10], me[15], me[20],
+										me[1], me[11], me[16], me[21],
+										me[8], me[13], me[18], me[23],
+										me[9], me[14], me[19], me[24]);
+		AdjugateDeterminant[2] = mAdjugate.determinant();
+
+		mAdjugate = new THREE.Matrix4(	me[5], me[10], me[15], me[20],
+										me[1], me[11], me[16], me[21],
+										me[8], me[13], me[18], me[23],
+										me[9], me[14], me[19], me[24]);
+		AdjugateDeterminant[7] = mAdjugate.determinant();
+
+		te[0] = n23*n34*n42 - n24*n33*n42 + n24*n32*n43 - n22*n34*n43 - n23*n32*n44 + n22*n33*n44;
+		te[5] = n14*n33*n42 - n13*n34*n42 - n14*n32*n43 + n12*n34*n43 + n13*n32*n44 - n12*n33*n44;
+		te[10] = n13*n24*n42 - n14*n23*n42 + n14*n22*n43 - n12*n24*n43 - n13*n22*n44 + n12*n23*n44;
+		te[15] = n14*n23*n32 - n13*n24*n32 - n14*n22*n33 + n12*n24*n33 + n13*n22*n34 - n12*n23*n34;
+		te[20] = n14*n23*n32 - n13*n24*n32 - n14*n22*n33 + n12*n24*n33 + n13*n22*n34 - n12*n23*n34;
+		te[1] = n24*n33*n41 - n23*n34*n41 - n24*n31*n43 + n21*n34*n43 + n23*n31*n44 - n21*n33*n44;
+		te[5] = n13*n34*n41 - n14*n33*n41 + n14*n31*n43 - n11*n34*n43 - n13*n31*n44 + n11*n33*n44;
+		te[9] = n14*n23*n41 - n13*n24*n41 - n14*n21*n43 + n11*n24*n43 + n13*n21*n44 - n11*n23*n44;
+		te[13] = n13*n24*n31 - n14*n23*n31 + n14*n21*n33 - n11*n24*n33 - n13*n21*n34 + n11*n23*n34;
+
+		te[2] = n22*n34*n41 - n24*n32*n41 + n24*n31*n42 - n21*n34*n42 - n22*n31*n44 + n21*n32*n44;
+		te[6] = n14*n32*n41 - n12*n34*n41 - n14*n31*n42 + n11*n34*n42 + n12*n31*n44 - n11*n32*n44;
+		te[10] = n12*n24*n41 - n14*n22*n41 + n14*n21*n42 - n11*n24*n42 - n12*n21*n44 + n11*n22*n44;
+		te[14] = n14*n22*n31 - n12*n24*n31 - n14*n21*n32 + n11*n24*n32 + n12*n21*n34 - n11*n22*n34;
+
+		te[3] = n23*n32*n41 - n22*n33*n41 - n23*n31*n42 + n21*n33*n42 + n22*n31*n43 - n21*n32*n43;
+		te[7] = n12*n33*n41 - n13*n32*n41 + n13*n31*n42 - n11*n33*n42 - n12*n31*n43 + n11*n32*n43;
+		te[11] = n13*n22*n41 - n12*n23*n41 - n13*n21*n42 + n11*n23*n42 + n12*n21*n43 - n11*n22*n43;
+		te[15] = n12*n23*n31 - n13*n22*n31 + n13*n21*n32 - n11*n23*n32 - n12*n21*n33 + n11*n22*n33;
+
 		var det = mMatrix.determinant();
+
 		if ( det == 0 ) {
-			var msg = "Matrix5.getInverse(): can't invert matrix, determinant is 0";
+			var msg = "Matrix4.getInverse(): can't invert matrix, determinant is 0";
 			if ( throwOnInvertible || false ) {
 				throw new Error( msg ); 
 			} else {
@@ -221,93 +339,8 @@ FOUR.extend( FOUR.Matrix5.prototype, {
 			this.identity();
 			return this;
 		}
-
-	    //var s = numeric.dim(x), abs = Math.abs, m = s[0], n = s[1];
-	    var s = 5, abs = Math.abs, m = 5, n = 5;
-	    //var A = new FOUR.Matrix5().copy(mMatrix), Ai, Aj;
-	    var Ai, Aj;
-	    var I = new Array(n);
-	    var A = new Array(n);// = new FOUR.Matrix5().identity(), Ii, Ij;
-   	    var i, j, k, x;
-	    var Output = new FOUR.Matrix5().identity(), Ii, Ij;
-	    for(i = 0; i < n; i++) {
-	    	I[i] = new Array(m);
-	    	A[i] = new Array(m);
-	    }
-
-	    for(i = 0; i < n; i++) {
-	    	for(j = 0; j < m; j++) {
-	    		//de-serialize matrices
-	    		I[j][i] = Output.elements[s*j + i];
-	    		A[j][i] = mMatrix.elements[s*j + i];
-	    	}
-	    }
-
-		for(j = 0; j < n; ++j) {
-	        var i0 = -1;
-	        var v0 = -1;
-	        for(i = j; i !== m; ++i) {
-	        	k = abs(A[i][j]);
-	        	if(k > v0) {
-	        		i0 = i;
-	        		v0 = k;
-	        	}
-	        }
-	        Aj = A[i0]; A[i0] = A[j]; A[j] = Aj;
-	        Ij = I[i0]; I[i0] = I[j]; I[j] = Ij;
-	        x = Aj[j];
-	        for(k=j;k!==n;++k)    Aj[k] /= x; 
-	        for(k=n-1;k!==-1;--k) Ij[k] /= x;
-	        for(i=m-1;i!==-1;--i) {
-	            if(i!==j) {
-	                Ai = A[i];
-	                Ii = I[i];
-	                x = Ai[j];
-	                for(k=j+1;k!==n;++k)  Ai[k] -= Aj[k]*x;
-	                for(k=n-1;k>0;--k) { Ii[k] -= Ij[k]*x; --k; Ii[k] -= Ij[k]*x; }
-	                if(k===0) Ii[0] -= Ij[0]*x;
-	            }
-	        }
-	    }
-
-	    for(i = 0; i < n; i++) {
-	    	for(j = 0; j < m; j++) {
-	    		//serialize result
-	    		this.elements[s*i + j] = I[i][j].toFixed(5);
-	    	}
-	    }
-
+		this.multiplyScalar( 1 / det );
 	    return this;
-
-		// var n11 = me[0], n12 = me[4], n13 = me[8], n14 = me[12];
-		// var n21 = me[1], n22 = me[5], n23 = me[9], n24 = me[13];
-		// var n31 = me[2], n32 = me[6], n33 = me[10], n34 = me[14];
-		// var n41 = me[3], n42 = me[7], n43 = me[11], n44 = me[15];
-
-		// te[0] = n23*n34*n42 - n24*n33*n42 + n24*n32*n43 - n22*n34*n43 - n23*n32*n44 + n22*n33*n44;
-		// te[4] = n14*n33*n42 - n13*n34*n42 - n14*n32*n43 + n12*n34*n43 + n13*n32*n44 - n12*n33*n44;
-		// te[8] = n13*n24*n42 - n14*n23*n42 + n14*n22*n43 - n12*n24*n43 - n13*n22*n44 + n12*n23*n44;
-		// te[12] = n14*n23*n32 - n13*n24*n32 - n14*n22*n33 + n12*n24*n33 + n13*n22*n34 - n12*n23*n34;
-		// te[1] = n24*n33*n41 - n23*n34*n41 - n24*n31*n43 + n21*n34*n43 + n23*n31*n44 - n21*n33*n44;
-		// te[5] = n13*n34*n41 - n14*n33*n41 + n14*n31*n43 - n11*n34*n43 - n13*n31*n44 + n11*n33*n44;
-		// te[9] = n14*n23*n41 - n13*n24*n41 - n14*n21*n43 + n11*n24*n43 + n13*n21*n44 - n11*n23*n44;
-		// te[13] = n13*n24*n31 - n14*n23*n31 + n14*n21*n33 - n11*n24*n33 - n13*n21*n34 + n11*n23*n34;
-		// te[2] = n22*n34*n41 - n24*n32*n41 + n24*n31*n42 - n21*n34*n42 - n22*n31*n44 + n21*n32*n44;
-		// te[6] = n14*n32*n41 - n12*n34*n41 - n14*n31*n42 + n11*n34*n42 + n12*n31*n44 - n11*n32*n44;
-		// te[10] = n12*n24*n41 - n14*n22*n41 + n14*n21*n42 - n11*n24*n42 - n12*n21*n44 + n11*n22*n44;
-		// te[14] = n14*n22*n31 - n12*n24*n31 - n14*n21*n32 + n11*n24*n32 + n12*n21*n34 - n11*n22*n34;
-		// te[3] = n23*n32*n41 - n22*n33*n41 - n23*n31*n42 + n21*n33*n42 + n22*n31*n43 - n21*n32*n43;
-		// te[7] = n12*n33*n41 - n13*n32*n41 + n13*n31*n42 - n11*n33*n42 - n12*n31*n43 + n11*n32*n43;
-		// te[11] = n13*n22*n41 - n12*n23*n41 - n13*n21*n42 + n11*n23*n42 + n12*n21*n43 - n11*n22*n43;
-		// te[15] = n12*n23*n31 - n13*n22*n31 + n13*n21*n32 - n11*n23*n32 - n12*n21*n33 + n11*n22*n33;
-
-		//var det = me[ 0 ] * te[ 0 ] + me[ 1 ] * te[ 4 ] + me[ 2 ] * te[ 8 ] + me[ 3 ] * te[ 12 ];
-
-
-
-
-		//return this;
-
 	},
 
 /*
