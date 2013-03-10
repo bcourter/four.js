@@ -1,62 +1,30 @@
-var renderer, camera, settings, materials, objGeometry;
+//var renderer, camera, settings, materials, objGeometry;
 
-init();
-animate();
+$(document).ready(function() {
+   test();
+ });
 
-function init() {
-	renderer = new THREE.WebGLRenderer();
-	renderer.setSize(window.innerWidth, window.innerHeight);
-	document.body.appendChild(renderer.domElement);
+function test() {
+	var time = new Date().getTime() / 1000;
+	var mIdentityMatrix = new FOUR.Matrix5().identity();
+	var mIdentityMatrix2 = new FOUR.Matrix5().identity();
+	var mMatrix = new FOUR.Matrix5().makeRotationWX(time * 0.03);
+	var mInverse = new FOUR.Matrix5().makeRotationWY(time * 0.2);
+	var mResult = mMatrix.multiply(mInverse);
 	
-	camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 1000);
-	camera.position.z = 7;
-	
-	controls = new THREE.OrbitControls( camera, renderer.domElement );
-	controls.addEventListener( 'change', render );
-
-	window.addEventListener( 'resize', onWindowResize, false );
-
-	var Settings = function () {
-		this.modelListSelect = document.getElementById("modelList");
-		this.isStereographicCheckbox = document.getElementById("isStereographic");
-		this.isInvertingCheckbox = document.getElementById("isInverting");
-	};
-	
-	materials = [
-		new THREE.MeshLambertMaterial( { 
-			color: 0x222222, 
-			side: THREE.DoubleSide,
-			shading: THREE.FlatShading, 
-			transparent: true,  
-			opacity: 0.5
-		} ),
-		new THREE.MeshBasicMaterial( { 
-			color: 0xEEEEEE, 
-			shading: THREE.FlatShading, 
-			wireframe: true
-		} )
-	];
-	
-	objGeometry = new FOUR.ObjGeometry('sheep.obj', 1);
-
-	settings = new Settings();	
+    alert(SerializeMatrix(mIdentityMatrix) === SerializeMatrix(mIdentityMatrix2));
 }
 
-function onWindowResize() {
-	camera.aspect = window.innerWidth / window.innerHeight;
-	camera.updateProjectionMatrix();
-
-	renderer.setSize( window.innerWidth, window.innerHeight );
+function SerializeMatrix(mMatrix) {
+	var SerializedArray = "";
+	for (var i = 0; i < mMatrix.elements.length; i++) {
+		//alert (mIdentityMatrix.elements[i]);
+    	SerializedArray = SerializedArray + ',' + mMatrix.elements[i];
+    }
+    return(SerializedArray);
 }
 
-function animate() {
-	requestAnimationFrame( animate, renderer.domElement );
-
-	render();
-	controls.update();
-	//stats.update();
-}
-
+/*
 function render() {
 	var time = new Date().getTime() / 1000;
 	var scene = new THREE.Scene();
@@ -114,3 +82,4 @@ function render() {
 
 	renderer.render( scene, camera );
 }
+*/
