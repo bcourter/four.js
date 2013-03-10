@@ -37,7 +37,9 @@ function init() {
 		} )
 	];
 	
-	objGeometry = new FOUR.ObjGeometry('sheep.obj', 1);
+	
+	objGeometry = [];
+	//new FOUR.ObjGeometry('sheep.obj', 1);
 
 	settings = new Settings();	
 }
@@ -72,8 +74,11 @@ function render() {
 		fourGeometry = new FOUR.CliffordTorusGeometry( 1, 1, 1, 1, 64, 64, 64, 64 );
 	}
 	
-	if (modelName == "obj") {
-		fourGeometry = objGeometry.clone();
+	if (modelName.match(/\.obj/i)) {
+		if (objGeometry[modelName] === undefined)
+			objGeometry[modelName] = new FOUR.ObjGeometry(modelName, 1);
+		
+		fourGeometry = objGeometry[modelName].clone();
 	}
 	
 	if (fourGeometry == null) {

@@ -4,14 +4,14 @@
  * @author bcourter / http://blakecourter.com 
  */
 
-FOUR.Box3 = function ( min, max ) {
+FOUR.Box4 = function ( min, max ) {
 
 	this.min = ( min !== undefined ) ? min : new THREE.Vector4( Infinity, Infinity, Infinity, Infinity );
 	this.max = ( max !== undefined ) ? max : new THREE.Vector4( -Infinity, -Infinity, -Infinity, -Infinity );
 
 };
 
-FOUR.extend( FOUR.Box3.prototype, {
+FOUR.extend( FOUR.Box4.prototype, {
 
 	set: function ( min, max ) {
 

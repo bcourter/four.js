@@ -1,0 +1,279 @@
+# Max2Mtl Version 4.0 Mar 10th, 2001
+#
+# Multi/Sub Material__56 (31) to come 
+#
+newmtl HARRtail
+Ka  0.0 0.0 0.0
+Kd  0.0 0.0 0.0
+Ks  0.9 0.9 0.9
+d  0.0
+Ns  0.0
+illum 2
+map_d HARRTAIT.JPG
+#
+newmtl HARRblkm
+Ka  0.1 0.1 0.1
+Kd  0.1 0.1 0.1
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  2.6
+illum 2
+#
+newmtl HARRglas
+Ka  0.2 0.2 0.4
+Kd  0.2 0.2 0.4
+Ks  0.9 0.9 0.9
+d  0.3
+Ns  3.0
+illum 2
+#
+newmtl HARRmaiL
+Ka  0.7 0.7 0.7
+Kd  0.7 0.7 0.7
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  1.5
+illum 2
+map_Kd HARRTXLT.JPG
+#
+newmtl HARRmaiD
+Ka  0.7 0.7 0.7
+Kd  0.7 0.7 0.7
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  1.5
+illum 2
+map_Kd HARRTXDT.JPG
+#
+newmtl HARRwhit
+Ka  0.9 0.9 0.9
+Kd  0.9 0.9 0.9
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.8
+illum 2
+#
+newmtl HARRglas1
+Ka  0.2 0.2 0.4
+Kd  0.2 0.2 0.4
+Ks  0.9 0.9 0.9
+d  0.3
+Ns  3.0
+illum 2
+#
+newmtl HARRcpit
+Ka  0.3 0.3 0.3
+Kd  0.3 0.3 0.3
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  3.0
+illum 2
+#
+newmtl HARRmaiD1
+Ka  0.7 0.7 0.7
+Kd  0.7 0.7 0.7
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  1.5
+illum 2
+map_Kd HARRTXDT.JPG
+#
+newmtl HARRstar
+Ka  0.0 0.0 0.0
+Kd  0.0 0.0 0.0
+Ks  0.9 0.9 0.9
+d  0.0
+Ns  0.0
+illum 2
+map_d HARRSTAT.JPG
+#
+newmtl HARRtai5
+Ka  0.0 0.0 0.0
+Kd  0.0 0.0 0.0
+Ks  0.9 0.9 0.9
+d  0.0
+Ns  0.0
+illum 2
+map_d HARRTA5T.JPG
+#
+newmtl HARRhh
+Ka  0.0 0.0 0.0
+Kd  0.0 0.0 0.0
+Ks  0.9 0.9 0.9
+d  0.0
+Ns  0.0
+illum 2
+map_d HARRHHT.JPG
+#
+newmtl HARRintk
+Ka  0.0 0.0 0.0
+Kd  0.0 0.0 0.0
+Ks  0.9 0.9 0.9
+d  0.0
+Ns  0.0
+illum 2
+map_d HARRINTT.JPG
+#
+newmtl HARRpik
+Ka  0.0 0.0 0.0
+Kd  0.0 0.0 0.0
+Ks  0.9 0.9 0.9
+d  0.0
+Ns  0.0
+illum 2
+map_Kd HARRPIKT.JPG
+map_d HARRPIKO.JPG
+#
+newmtl HARRside
+Ka  0.0 0.0 0.0
+Kd  0.0 0.0 0.0
+Ks  0.9 0.9 0.9
+d  0.0
+Ns  0.0
+illum 2
+map_d HARRSIDT.JPG
+#
+newmtl HARRsqua
+Ka  0.0 0.0 0.0
+Kd  0.0 0.0 0.0
+Ks  0.9 0.9 0.9
+d  0.0
+Ns  0.0
+illum 2
+map_d HARRSQUT.JPG
+#
+newmtl HARRtri
+Ka  0.0 0.0 0.0
+Kd  0.0 0.0 0.0
+Ks  0.9 0.9 0.9
+d  0.0
+Ns  0.0
+illum 2
+map_d HARRTRIT.JPG
+#
+newmtl HARRdec2
+Ka  0.0 0.0 0.0
+Kd  0.0 0.0 0.0
+Ks  0.9 0.9 0.9
+d  0.0
+Ns  0.0
+illum 2
+map_d HARRDE2T.JPG
+#
+newmtl HARRvma
+Ka  0.0 0.0 0.0
+Kd  0.0 0.0 0.0
+Ks  0.9 0.9 0.9
+d  0.0
+Ns  0.0
+illum 2
+map_d HARRVMAT.JPG
+#
+newmtl HATTtxSD
+Ka  0.7 0.7 0.7
+Kd  0.7 0.7 0.7
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  1.5
+illum 2
+map_Kd HARRTXST.JPG
+#
+newmtl HARRta52
+Ka  0.0 0.0 0.0
+Kd  0.0 0.0 0.0
+Ks  0.9 0.9 0.9
+d  0.0
+Ns  0.0
+illum 2
+map_d HARRT52T.JPG
+#
+newmtl HARRint2
+Ka  0.0 0.0 0.0
+Kd  0.0 0.0 0.0
+Ks  0.9 0.9 0.9
+d  0.0
+Ns  0.0
+illum 2
+map_d HARRIN2T.JPG
+#
+newmtl HARRsid2
+Ka  0.0 0.0 0.0
+Kd  0.0 0.0 0.0
+Ks  0.9 0.9 0.9
+d  0.0
+Ns  0.0
+illum 2
+map_d HARRSI2T.JPG
+#
+newmtl HARRtai2
+Ka  0.0 0.0 0.0
+Kd  0.0 0.0 0.0
+Ks  0.9 0.9 0.9
+d  0.0
+Ns  0.0
+illum 2
+map_d HARRTA2T.JPG
+#
+newmtl HARRvma2
+Ka  0.0 0.0 0.0
+Kd  0.0 0.0 0.0
+Ks  0.9 0.9 0.9
+d  0.0
+Ns  0.0
+illum 2
+map_d HARRVM2T.JPG
+#
+newmtl HARRmari
+Ka  0.0 0.0 0.0
+Kd  0.0 0.0 0.0
+Ks  0.9 0.9 0.9
+d  0.0
+Ns  0.0
+illum 2
+map_d HARRMART.JPG
+#
+newmtl HARRpanl
+Ka  0.5 0.5 0.5
+Kd  0.5 0.5 0.5
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  6.8
+illum 2
+map_Kd HARRPANL.JPG
+#
+newmtl HARRtxTP
+Ka  0.7 0.7 0.7
+Kd  0.7 0.7 0.7
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  1.5
+illum 2
+map_Kd HARRTXTT.JPG
+#
+newmtl HARRmetl
+Ka  0.4 0.4 0.4
+Kd  0.4 0.4 0.4
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  7.4
+illum 2
+#
+newmtl HARRgear
+Ka  0.2 0.2 0.2
+Kd  0.2 0.2 0.2
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  3.0
+illum 2
+#
+newmtl HARRchro
+Ka  0.4 0.4 0.4
+Kd  0.4 0.4 0.4
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  5.4
+illum 2
+#
+# Multi/Sub Material__56 done 
+#
+# EOF

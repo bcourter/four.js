@@ -1,0 +1,40 @@
+# Blender MTL File: 'harpy.blend'
+# Material Count: 3
+
+newmtl mi_aerialDrone_body
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd t_aerialDrone_body_d.tga
+map_Ks t_aerialDrone_body_sm.tga
+map_Ke t_aerialDrone_body_m.tga
+map_Disp t_aerialDrone_body_n.tga
+
+newmtl mi_aerialDrone_feathers
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd t_aerialDrone_feathers_dm.tga
+map_Disp t_aerialDrone_feathers_n.tga
+map_Ke t_aerialDrone_feathers_m.tga
+
+newmtl mi_aerialDrone_head
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd t_aerialDrone_head_d.tga
+map_Ks t_aerialDrone_head_s.tga
+map_Ke t_aerialDrone_head_m.tga
+map_Disp t_aerialDrone_head_n.tga
