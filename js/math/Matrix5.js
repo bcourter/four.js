@@ -209,21 +209,43 @@ FOUR.extend( FOUR.Matrix5.prototype, {
 	getInverse: function ( mMatrix, throwOnInvertible ) {
 		//based 
 		// based on http://www.euclideanspace.com/maths/algebra/matrix/functions/inverse/fourD/index.htm
-
+		var det = mMatrix.determinant();
+		if ( det == 0 ) {
+			var msg = "Matrix4.getInverse(): can't invert matrix, determinant is 0";
+			if ( throwOnInvertible || false ) {
+				throw new Error( msg ); 
+			} else {
+				console.warn( msg );
+			}
+			this.identity();
+			return this;
+		}
+		
 	    //var s = numeric.dim(x), abs = Math.abs, m = s[0], n = s[1];
 	    var s = 5, abs = Math.abs, m = 5, n = 5;
-	    var A = new FOUR.Matrix5().copy(mMatrix), Ai, Aj;
-	    var I = new FOUR.Matrix5().identity(), Ii, Ij;
-	    var i,j,k,x;
+	    //var A = new FOUR.Matrix5().copy(mMatrix), Ai, Aj;
+	    var Ai, Aj;
+	    var I = new Array(n);
+	    var A = new Array(n);// = new FOUR.Matrix5().identity(), Ii, Ij;
+   	    var i, j, k, x;
+	    var Output = new FOUR.Matrix5().identity(), Ii, Ij;
+	    for(i = 0; i < n; i++) {
+	    	I[i] = new Array(m);
+	    	A[i] = new Array(m);
+	    	for(j = 0; j < m; j++) {
+	    		//de-serialize matrices
+	    		I[i][j] = Output.elements[s*i + j];
+	    		A[i][j] = mMatrix.elements[s*i + j];
+	    	}
+	    }
 
-		var te = this.elements;
-		var me = mMatrix.elements;
 
-	    for(j = 0; j < n; ++j) {
+
+		for(j = 0; j < n; ++j) {
 	        var i0 = -1;
 	        var v0 = -1;
 	        for(i = j; i !== m; ++i) {
-	        	k = abs(A[i][j]);
+	        	k = abs(A[j][i]);
 	        	if(k > v0) {
 	        		i0 = i;
 	        		v0 = k;
@@ -244,13 +266,14 @@ FOUR.extend( FOUR.Matrix5.prototype, {
 	                if(k===0) Ii[0] -= Ij[0]*x;
 	            }
 	        }
-	        for(k = 0; k < m; ++k) {
-	    	//convert I to te
-	    	alert(I[i][k]);
-	        }
 	    }
 
-
+	    for(i = 0; i < n; i++) {
+	    	for(j = 0; j < m; j++) {
+	    		//serialize result
+	    		this.elements[s*i + j] = I[i][j];
+	    	}
+	    }
 
 
 		var det = this.determinant();
