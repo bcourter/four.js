@@ -409,33 +409,7 @@ FOUR.extend( FOUR.Matrix5.prototype, {
 					me[5]  *  AdjugateDeterminant[1]  +
 					me[10] *  AdjugateDeterminant[2]  +
 					me[15] *  AdjugateDeterminant[3]  +
-					me[20] *  AdjugateDeterminant[4]  +
- 
-					me[1]  *  AdjugateDeterminant[5]  +
-					me[6]  *  AdjugateDeterminant[6]  +
-					me[11] *  AdjugateDeterminant[7]  +
-					me[16] *  AdjugateDeterminant[8]  +
-					me[21] *  AdjugateDeterminant[9]  +
-
-					me[2]  *  AdjugateDeterminant[10] +
-					me[7]  *  AdjugateDeterminant[11] +
-					me[12] *  AdjugateDeterminant[12] +
-					me[17] *  AdjugateDeterminant[13] +
-					me[22] *  AdjugateDeterminant[14] +
- 
-					me[3]  *  AdjugateDeterminant[15] +
-					me[8]  *  AdjugateDeterminant[16] +
-					me[13] *  AdjugateDeterminant[17] +
-					me[18] *  AdjugateDeterminant[18] +
-					me[23] *  AdjugateDeterminant[19] +
- 
-					me[4]  *  AdjugateDeterminant[20] +
-					me[9]  *  AdjugateDeterminant[21] +
-					me[14] *  AdjugateDeterminant[22] +
-					me[19] *  AdjugateDeterminant[23] +
-					me[24] *  AdjugateDeterminant[24];
-
-		//det = 5;
+					me[20] *  AdjugateDeterminant[4];
 
 		if ( det == 0 ) {
 			var msg = "Matrix4.getInverse(): can't invert matrix, determinant is 0";
