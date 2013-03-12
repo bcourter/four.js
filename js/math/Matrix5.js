@@ -30,7 +30,7 @@ FOUR.Matrix5 = function (
 	te[1] = n21 || 0; te[6] = ( n22 !== undefined ) ? n22 : 1; te[11] = n23 || 0; te[16] = n24 || 0; te[21] = n25 || 0;
 	te[2] = n31 || 0; te[7] = n32 || 0; te[12] = ( n33 !== undefined ) ? n33 : 1; te[17] = n34 || 0; te[22] = n35 || 0;
 	te[3] = n41 || 0; te[8] = n42 || 0; te[13] = n43 || 0; te[18] = ( n44 !== undefined ) ? n44 : 1; te[23] = n45 || 0;
-	te[4] = n51 || 0; te[9] = n52 || 0; te[14] = n53 || 0; te[19] = n54 || 0; te[55] = ( n55 !== undefined ) ? n55 : 1; 
+	te[4] = n51 || 0; te[9] = n52 || 0; te[14] = n53 || 0; te[19] = n54 || 0; te[24] = ( n55 !== undefined ) ? n55 : 1; 
 
 };
 
@@ -137,7 +137,7 @@ FOUR.extend( FOUR.Matrix5.prototype, {
 		te[23] = a41 * b15 + a42 * b25 + a43 * b35 + a44 * b45 + a45 * b55;
 
 		te[4] = a51 * b11 + a52 * b21 + a53 * b31 + a54 * b41 + a55 * b51
-		te[19] = a51 * b12 + a52 * b22 + a53 * b32 + a54 * b42 + a55 * b52;
+		te[9] = a51 * b12 + a52 * b22 + a53 * b32 + a54 * b42 + a55 * b52;
 		te[14] = a51 * b13 + a52 * b23 + a53 * b33 + a54 * b43 + a55 * b53;
 		te[19] = a51 * b14 + a52 * b24 + a53 * b34 + a54 * b44 + a55 * b54;
 		te[24] = a51 * b15 + a52 * b25 + a53 * b35 + a54 * b45 + a55 * b55;
@@ -245,31 +245,31 @@ FOUR.extend( FOUR.Matrix5.prototype, {
 										me[2], me[12], me[17], me[22],
 										me[3], me[13], me[18], me[23],
 										me[4], me[14], me[19], me[24]);
-		AdjugateDeterminant[5] = mAdjugate.determinant();
+		AdjugateDeterminant[1] = -mAdjugate.determinant();
 
 		mAdjugate = new THREE.Matrix4(	me[1], me[6], me[16], me[21],
 										me[2], me[7], me[17], me[22],
 										me[3], me[8], me[18], me[23],
 										me[4], me[9], me[19], me[24]);
-		AdjugateDeterminant[10] = mAdjugate.determinant();
+		AdjugateDeterminant[2] = mAdjugate.determinant();
 
 		mAdjugate = new THREE.Matrix4(	me[1], me[6], me[11], me[21],
 										me[2], me[7], me[12], me[22],
 										me[3], me[8], me[13], me[23],
 										me[4], me[9], me[14], me[24]);
-		AdjugateDeterminant[15] = mAdjugate.determinant();
+		AdjugateDeterminant[3] = -mAdjugate.determinant();
 
 		mAdjugate = new THREE.Matrix4(	me[1], me[6], me[11], me[16],
 										me[2], me[7], me[12], me[17],
 										me[3], me[8], me[13], me[18],
 										me[4], me[9], me[14], me[19]);
-		AdjugateDeterminant[20] = mAdjugate.determinant();
+		AdjugateDeterminant[4] = mAdjugate.determinant();
 
 		mAdjugate = new THREE.Matrix4(	me[5], me[10], me[15], me[20],
 										me[7], me[12], me[17], me[22],
 										me[8], me[13], me[18], me[23],
 										me[9], me[14], me[19], me[24]);
-		AdjugateDeterminant[1] = mAdjugate.determinant();
+		AdjugateDeterminant[5] = -mAdjugate.determinant();
 
 		mAdjugate = new THREE.Matrix4(	me[0], me[10], me[15], me[20],
 										me[2], me[12], me[17], me[22],
@@ -281,53 +281,161 @@ FOUR.extend( FOUR.Matrix5.prototype, {
 										me[2], me[7], me[17], me[22],
 										me[3], me[8], me[18], me[23],
 										me[4], me[9], me[19], me[24]);
-		AdjugateDeterminant[11] = mAdjugate.determinant();		
+		AdjugateDeterminant[7] = -mAdjugate.determinant();		
 
 		mAdjugate = new THREE.Matrix4(	me[0], me[5], me[10], me[20],
 										me[2], me[7], me[12], me[22],
 										me[3], me[8], me[13], me[23],
 										me[4], me[9], me[14], me[24]);
-		AdjugateDeterminant[16] = mAdjugate.determinant();		
+		AdjugateDeterminant[8] = mAdjugate.determinant();		
 
 		mAdjugate = new THREE.Matrix4(	me[0], me[5], me[10], me[15],
 										me[2], me[7], me[12], me[17],
 										me[3], me[8], me[13], me[18],
 										me[4], me[9], me[14], me[19]);
-		AdjugateDeterminant[21] = mAdjugate.determinant();		
+		AdjugateDeterminant[9] = -mAdjugate.determinant();		
 
 		mAdjugate = new THREE.Matrix4(	me[5], me[10], me[15], me[20],
-										me[1], me[11], me[16], me[21],
+										me[6], me[11], me[16], me[21],
 										me[8], me[13], me[18], me[23],
 										me[9], me[14], me[19], me[24]);
-		AdjugateDeterminant[2] = mAdjugate.determinant();
+		AdjugateDeterminant[10] = mAdjugate.determinant();
+
+		mAdjugate = new THREE.Matrix4(	me[0], me[10], me[15], me[20],
+										me[1], me[11], me[16], me[21],
+										me[3], me[13], me[18], me[23],
+										me[4], me[14], me[19], me[24]);
+		AdjugateDeterminant[11] = -mAdjugate.determinant();
+
+		mAdjugate = new THREE.Matrix4(	me[0], me[5], me[15], me[20],
+										me[1], me[6], me[16], me[21],
+										me[3], me[8], me[18], me[23],
+										me[4], me[9], me[19], me[24]);
+		AdjugateDeterminant[12] = mAdjugate.determinant();
+
+		mAdjugate = new THREE.Matrix4(	me[0], me[5], me[10], me[20],
+										me[1], me[6], me[11], me[21],
+										me[3], me[8], me[13], me[23],
+										me[4], me[9], me[14], me[24]);
+		AdjugateDeterminant[13] = -mAdjugate.determinant();
+
+		mAdjugate = new THREE.Matrix4(	me[0], me[5], me[10], me[15],
+										me[1], me[6], me[11], me[16],
+										me[3], me[8], me[13], me[18],
+										me[4], me[9], me[14], me[19]);
+		AdjugateDeterminant[14] = mAdjugate.determinant();
 
 		mAdjugate = new THREE.Matrix4(	me[5], me[10], me[15], me[20],
-										me[1], me[11], me[16], me[21],
-										me[8], me[13], me[18], me[23],
+										me[6], me[11], me[16], me[21],
+										me[7], me[12], me[17], me[22],
 										me[9], me[14], me[19], me[24]);
-		AdjugateDeterminant[7] = mAdjugate.determinant();
+		AdjugateDeterminant[15] = -mAdjugate.determinant();
 
-		te[0] = n23*n34*n42 - n24*n33*n42 + n24*n32*n43 - n22*n34*n43 - n23*n32*n44 + n22*n33*n44;
-		te[5] = n14*n33*n42 - n13*n34*n42 - n14*n32*n43 + n12*n34*n43 + n13*n32*n44 - n12*n33*n44;
-		te[10] = n13*n24*n42 - n14*n23*n42 + n14*n22*n43 - n12*n24*n43 - n13*n22*n44 + n12*n23*n44;
-		te[15] = n14*n23*n32 - n13*n24*n32 - n14*n22*n33 + n12*n24*n33 + n13*n22*n34 - n12*n23*n34;
-		te[20] = n14*n23*n32 - n13*n24*n32 - n14*n22*n33 + n12*n24*n33 + n13*n22*n34 - n12*n23*n34;
-		te[1] = n24*n33*n41 - n23*n34*n41 - n24*n31*n43 + n21*n34*n43 + n23*n31*n44 - n21*n33*n44;
-		te[5] = n13*n34*n41 - n14*n33*n41 + n14*n31*n43 - n11*n34*n43 - n13*n31*n44 + n11*n33*n44;
-		te[9] = n14*n23*n41 - n13*n24*n41 - n14*n21*n43 + n11*n24*n43 + n13*n21*n44 - n11*n23*n44;
-		te[13] = n13*n24*n31 - n14*n23*n31 + n14*n21*n33 - n11*n24*n33 - n13*n21*n34 + n11*n23*n34;
+		mAdjugate = new THREE.Matrix4(	me[0], me[10], me[15], me[20],
+										me[1], me[11], me[16], me[21],
+										me[2], me[12], me[17], me[22],
+										me[4], me[14], me[19], me[24]);
+		AdjugateDeterminant[16] = mAdjugate.determinant();
 
-		te[2] = n22*n34*n41 - n24*n32*n41 + n24*n31*n42 - n21*n34*n42 - n22*n31*n44 + n21*n32*n44;
-		te[6] = n14*n32*n41 - n12*n34*n41 - n14*n31*n42 + n11*n34*n42 + n12*n31*n44 - n11*n32*n44;
-		te[10] = n12*n24*n41 - n14*n22*n41 + n14*n21*n42 - n11*n24*n42 - n12*n21*n44 + n11*n22*n44;
-		te[14] = n14*n22*n31 - n12*n24*n31 - n14*n21*n32 + n11*n24*n32 + n12*n21*n34 - n11*n22*n34;
+		mAdjugate = new THREE.Matrix4(	me[0], me[5], me[15], me[20],
+										me[1], me[6], me[16], me[21],
+										me[2], me[7], me[17], me[22],
+										me[4], me[9], me[19], me[24]);
+		AdjugateDeterminant[17] = -mAdjugate.determinant();
 
-		te[3] = n23*n32*n41 - n22*n33*n41 - n23*n31*n42 + n21*n33*n42 + n22*n31*n43 - n21*n32*n43;
-		te[7] = n12*n33*n41 - n13*n32*n41 + n13*n31*n42 - n11*n33*n42 - n12*n31*n43 + n11*n32*n43;
-		te[11] = n13*n22*n41 - n12*n23*n41 - n13*n21*n42 + n11*n23*n42 + n12*n21*n43 - n11*n22*n43;
-		te[15] = n12*n23*n31 - n13*n22*n31 + n13*n21*n32 - n11*n23*n32 - n12*n21*n33 + n11*n22*n33;
+		mAdjugate = new THREE.Matrix4(	me[0], me[5], me[10], me[20],
+										me[1], me[6], me[11], me[21],
+										me[2], me[7], me[12], me[22],
+										me[4], me[9], me[14], me[24]);
+		AdjugateDeterminant[18] = mAdjugate.determinant();
 
-		var det = mMatrix.determinant();
+		mAdjugate = new THREE.Matrix4(	me[0], me[5], me[10], me[15],
+										me[1], me[6], me[11], me[16],
+										me[2], me[7], me[12], me[17],
+										me[4], me[9], me[14], me[19]);
+		AdjugateDeterminant[19] = -mAdjugate.determinant();
+
+		mAdjugate = new THREE.Matrix4(	me[5], me[10], me[15], me[20],
+										me[6], me[11], me[16], me[21],
+										me[7], me[12], me[17], me[22],
+										me[8], me[13], me[18], me[23]);
+		AdjugateDeterminant[20] = mAdjugate.determinant();
+
+		mAdjugate = new THREE.Matrix4(	me[0], me[10], me[15], me[20],
+										me[1], me[11], me[16], me[21],
+										me[2], me[12], me[17], me[22],
+										me[3], me[13], me[18], me[23]);
+		AdjugateDeterminant[21] = -mAdjugate.determinant();
+
+		mAdjugate = new THREE.Matrix4(	me[0], me[5], me[15], me[20],
+										me[1], me[6], me[16], me[21],
+										me[2], me[7], me[17], me[22],
+										me[3], me[8], me[18], me[23]);
+		AdjugateDeterminant[22] = mAdjugate.determinant();
+
+		mAdjugate = new THREE.Matrix4(	me[0], me[5], me[10], me[20],
+										me[1], me[6], me[11], me[21],
+										me[2], me[7], me[12], me[22],
+										me[3], me[8], me[13], me[23]);
+		AdjugateDeterminant[23] = -mAdjugate.determinant();
+
+		mAdjugate = new THREE.Matrix4(	me[0], me[5], me[10], me[15],
+										me[1], me[6], me[11], me[16],
+										me[2], me[7], me[12], me[17],
+										me[3], me[8], me[13], me[18]);
+		AdjugateDeterminant[24] = mAdjugate.determinant();
+
+		// te[0] = n23*n34*n42 - n24*n33*n42 + n24*n32*n43 - n22*n34*n43 - n23*n32*n44 + n22*n33*n44;
+		// te[5] = n14*n33*n42 - n13*n34*n42 - n14*n32*n43 + n12*n34*n43 + n13*n32*n44 - n12*n33*n44;
+		// te[10] = n13*n24*n42 - n14*n23*n42 + n14*n22*n43 - n12*n24*n43 - n13*n22*n44 + n12*n23*n44;
+		// te[15] = n14*n23*n32 - n13*n24*n32 - n14*n22*n33 + n12*n24*n33 + n13*n22*n34 - n12*n23*n34;
+		// te[20] = n14*n23*n32 - n13*n24*n32 - n14*n22*n33 + n12*n24*n33 + n13*n22*n34 - n12*n23*n34;
+		// te[1] = n24*n33*n41 - n23*n34*n41 - n24*n31*n43 + n21*n34*n43 + n23*n31*n44 - n21*n33*n44;
+		// te[5] = n13*n34*n41 - n14*n33*n41 + n14*n31*n43 - n11*n34*n43 - n13*n31*n44 + n11*n33*n44;
+		// te[9] = n14*n23*n41 - n13*n24*n41 - n14*n21*n43 + n11*n24*n43 + n13*n21*n44 - n11*n23*n44;
+		// te[13] = n13*n24*n31 - n14*n23*n31 + n14*n21*n33 - n11*n24*n33 - n13*n21*n34 + n11*n23*n34;
+
+		// te[2] = n22*n34*n41 - n24*n32*n41 + n24*n31*n42 - n21*n34*n42 - n22*n31*n44 + n21*n32*n44;
+		// te[6] = n14*n32*n41 - n12*n34*n41 - n14*n31*n42 + n11*n34*n42 + n12*n31*n44 - n11*n32*n44;
+		// te[10] = n12*n24*n41 - n14*n22*n41 + n14*n21*n42 - n11*n24*n42 - n12*n21*n44 + n11*n22*n44;
+		// te[14] = n14*n22*n31 - n12*n24*n31 - n14*n21*n32 + n11*n24*n32 + n12*n21*n34 - n11*n22*n34;
+
+		// te[3] = n23*n32*n41 - n22*n33*n41 - n23*n31*n42 + n21*n33*n42 + n22*n31*n43 - n21*n32*n43;
+		// te[7] = n12*n33*n41 - n13*n32*n41 + n13*n31*n42 - n11*n33*n42 - n12*n31*n43 + n11*n32*n43;
+		// te[11] = n13*n22*n41 - n12*n23*n41 - n13*n21*n42 + n11*n23*n42 + n12*n21*n43 - n11*n22*n43;
+		// te[15] = n12*n23*n31 - n13*n22*n31 + n13*n21*n32 - n11*n23*n32 - n12*n21*n33 + n11*n22*n33;
+
+		var det = 	me[0]  *  AdjugateDeterminant[0]  +
+					me[5]  *  AdjugateDeterminant[1]  +
+					me[10] *  AdjugateDeterminant[2]  +
+					me[15] *  AdjugateDeterminant[3]  +
+					me[20] *  AdjugateDeterminant[4]  +
+ 
+					me[1]  *  AdjugateDeterminant[5]  +
+					me[6]  *  AdjugateDeterminant[6]  +
+					me[11] *  AdjugateDeterminant[7]  +
+					me[16] *  AdjugateDeterminant[8]  +
+					me[21] *  AdjugateDeterminant[9]  +
+
+					me[2]  *  AdjugateDeterminant[10] +
+					me[7]  *  AdjugateDeterminant[11] +
+					me[12] *  AdjugateDeterminant[12] +
+					me[17] *  AdjugateDeterminant[13] +
+					me[22] *  AdjugateDeterminant[14] +
+ 
+					me[3]  *  AdjugateDeterminant[15] +
+					me[8]  *  AdjugateDeterminant[16] +
+					me[13] *  AdjugateDeterminant[17] +
+					me[18] *  AdjugateDeterminant[18] +
+					me[23] *  AdjugateDeterminant[19] +
+ 
+					me[4]  *  AdjugateDeterminant[20] +
+					me[9]  *  AdjugateDeterminant[21] +
+					me[14] *  AdjugateDeterminant[22] +
+					me[19] *  AdjugateDeterminant[23] +
+					me[24] *  AdjugateDeterminant[24];
+
+		//det = 5;
 
 		if ( det == 0 ) {
 			var msg = "Matrix4.getInverse(): can't invert matrix, determinant is 0";
