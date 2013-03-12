@@ -3994,61 +3994,49 @@ THREE.extend( THREE.Matrix4.prototype, {
 
 		var te = this.elements;
 
-		var m00 = te[0], m10 = te[4], m20 = te[8],  m30 = te[12];
-		var m01 = te[1], m11 = te[5], m21 = te[9],  m31 = te[13];
-		var m02 = te[2], m12 = te[6], m22 = te[10], m32 = te[14];
-		var m03 = te[3], m13 = te[7], m23 = te[11], m33 = te[15];
+		var n11 = te[0], n12 = te[4], n13 = te[8], n14 = te[12];
+		var n21 = te[1], n22 = te[5], n23 = te[9], n24 = te[13];
+		var n31 = te[2], n32 = te[6], n33 = te[10], n34 = te[14];
+		var n41 = te[3], n42 = te[7], n43 = te[11], n44 = te[15];
 
 		//TODO: make this more efficient
 		//( based on http://www.euclideanspace.com/maths/algebra/matrix/functions/inverse/fourD/index.htm )
-		return m03 * m12 * m21 * m30 - m02 * m13 * m21 * m30-
-		m03 * m11 * m22 * m30+m01 * m13 * m22 * m30+
-		m02 * m11 * m23 * m30-m01 * m12 * m23 * m30-
-		m03 * m12 * m20 * m31+m02 * m13 * m20 * m31+
-		m03 * m10 * m22 * m31-m00 * m13 * m22 * m31-
-		m02 * m10 * m23 * m31+m00 * m12 * m23 * m31+
-		m03 * m11 * m20 * m32-m01 * m13 * m20 * m32-
-		m03 * m10 * m21 * m32+m00 * m13 * m21 * m32+
-		m01 * m10 * m23 * m32-m00 * m11 * m23 * m32-
-		m02 * m11 * m20 * m33+m01 * m12 * m20 * m33+
-		m02 * m10 * m21 * m33-m00 * m12 * m21 * m33-
-		m01 * m10 * m22 * m33+m00 * m11 * m22 * m33;
 
-		// return (
-		// 	n41 * (
-		// 		+n14 * n23 * n32
-		// 		-n13 * n24 * n32
-		// 		-n14 * n22 * n33
-		// 		+n12 * n24 * n33
-		// 		+n13 * n22 * n34
-		// 		-n12 * n23 * n34
-		// 	) +
-		// 	n42 * (
-		// 		+n11 * n23 * n34
-		// 		-n11 * n24 * n33
-		// 		+n14 * n21 * n33
-		// 		-n13 * n21 * n34
-		// 		+n13 * n24 * n31
-		// 		-n14 * n23 * n31
-		// 	) +
-		// 	n43 * (
-		// 		+n11 * n24 * n32
-		// 		-n11 * n22 * n34
-		// 		-n14 * n21 * n32
-		// 		+n12 * n21 * n34
-		// 		+n14 * n22 * n31
-		// 		-n12 * n24 * n31
-		// 	) +
-		// 	n44 * (
-		// 		-n13 * n22 * n31
-		// 		-n11 * n23 * n32
-		// 		+n11 * n22 * n33
-		// 		+n13 * n21 * n32
-		// 		-n12 * n21 * n33
-		// 		+n12 * n23 * n31
-		// 	)
+		return (
+			n41 * (
+				+n14 * n23 * n32
+				-n13 * n24 * n32
+				-n14 * n22 * n33
+				+n12 * n24 * n33
+				+n13 * n22 * n34
+				-n12 * n23 * n34
+			) +
+			n42 * (
+				+n11 * n23 * n34
+				-n11 * n24 * n33
+				+n14 * n21 * n33
+				-n13 * n21 * n34
+				+n13 * n24 * n31
+				-n14 * n23 * n31
+			) +
+			n43 * (
+				+n11 * n24 * n32
+				-n11 * n22 * n34
+				-n14 * n21 * n32
+				+n12 * n21 * n34
+				+n14 * n22 * n31
+				-n12 * n24 * n31
+			) +
+			n44 * (
+				-n13 * n22 * n31
+				-n11 * n23 * n32
+				+n11 * n22 * n33
+				+n13 * n21 * n32
+				-n12 * n21 * n33
+				+n12 * n23 * n31
+			)
 
-		// );
+		);
 
 	},
 
